@@ -3,6 +3,10 @@ import pandas as pd
 
 
 def int2alpha(valeur: int) -> str:
+    """
+    Transforme un entier (1-26-xxx) 
+    en son code colonne dans Excel (A-Z-yyy)
+    """
     valeur -= 1
     entier, reste = divmod(valeur, 26)
     if entier:
@@ -11,11 +15,18 @@ def int2alpha(valeur: int) -> str:
 
 
 def int2colonne(valeur: int) -> str:
+    """
+    Transforme un entier (1-26-xxx) 
+    en son code colonne (debut:fin) dans Excel (A:A-Z:Z-yyy:yyy)
+    """
     caractere = int2alpha(valeur)
     return f"{caractere}:{caractere}"
 
 
 def log(*datas):
+    """
+    Affichage de temps (date et heure) et des données passées en paramètres
+    """
     temps = datetime.datetime.now()
     print(f"{temps}", end=" - ")
     print(*datas, flush=True)
@@ -26,7 +37,10 @@ numPaiementMax: int = 10
 numIFMax: int = 10
 debut = datetime.datetime.now()
 
-dtypes = {
+
+# Creation du dictionnaire contenant le detail 
+# des clés du JSON a transformer en en-tête de colonnes Excel
+dtypes: dict = {
     "Identifiant unique de la demande d'aide": "string",
     "Liste des Dossiers": "string",
     "Code de la région de la demande d'aide": "string",
@@ -53,6 +67,7 @@ dtypes = {
     "Code du genre du bénéficiaire de l'aide": "string"
 }
 
+# Données de paiement
 indexPaiement: int = 1 + len(dtypes)
 for index in range(1+numPaiementMax):
     dtypes.update({
@@ -65,6 +80,7 @@ for index in range(1+numPaiementMax):
         f"Montant payé brut part UE {index}": "float64"
     })
 
+# Données des codes Mi
 indexCodeMi: int = 1 + len(dtypes)
 for index in range(1+codeMiMax):
     dtypes.update({
@@ -82,6 +98,7 @@ dtypes.update({
     "Montant des ressources restituées": "float64",
 })
 
+# Données des Produits Financiers
 indexProduitFinancier: int = 1 + len(dtypes)
 for index in range(1+numIFMax):
     dtypes.update({
@@ -206,6 +223,7 @@ with pd.ExcelWriter(to_filename, engine="xlsxwriter") as writer:
     for i in range(0, nb_colonnes_total):
         worksheet.write(f"{int2alpha(1+i)}1", df.columns[i], format2)
 
+# Calcul du temps de traitement
 fin = datetime.datetime.now()
 delta = fin - debut
 hours = delta.total_seconds() // 3600

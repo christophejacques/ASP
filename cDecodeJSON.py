@@ -110,6 +110,9 @@ class DecodeJSON:
         self.colonnes.append(("montantRecouvre", "Montant recouvré"))
 
     def process_json(self):
+        """
+        Transformer les données JSON en données CSV
+        """
 
         ligne: str = ""
 
