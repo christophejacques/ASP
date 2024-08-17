@@ -1,0 +1,95 @@
+[
+
+    {
+        "demandeAide": {
+            "calculAide": {
+                "donMtCalcules": [
+                    {
+                        "montantCalculeDACofi": 2608,
+                        "codeMUP": "7026_NAT_O.14_0001",
+                        "montantCalculeDATopup": 0
+                    }
+                ]
+            },
+            "dateDepotDA": "2023-04-05",
+            "methanisationOn": false,
+            "listeIdDossier": {
+                "idDossiersPartenaire": [
+                    "00001923-1"
+                ]
+            },
+            "dateValidationInstructionDA": "2023-07-11",
+            "recyclageEauOn": false,
+            "modernisationInstallationIrrigationOn": false,
+            "codeRegion": "076",
+            "beneficiaireAide": {
+                "exploitantAgricoleOn": true,
+                "guidBenAide": "fecf6ea4-9840-43aa-947f-ed9dcdfa09a7",
+                "codeGenreBenAide": "PDP"
+            },
+            "donIndicResultats": [
+                {
+                    "codeMi": "M.32",
+                    "quantiteCollecteeMi": 1
+                },
+                {
+                    "codeMi": "M.36",
+                    "quantiteCollecteeMi": 2
+                },
+                {
+                    "codeMi": "M.12",
+                    "quantiteCollecteeMi": 3
+                }
+            ],
+            "nouvelleInstallationIrrigationOn": false,
+            "hautDebitOn": false,
+            "paiements": [
+                {
+                    "idPaiement": "2",
+                    "datePaiement": "2023-09-15",
+                    "donMtPayes": [
+                        {
+                            "montantPayeBrutCofiDissocie": 0,
+                            "montantPayeBrutTopupDissocie": 0,
+                            "codeMUP": "7026_NAT_O.14_0001",
+                            "montantPayeBrutTopupAssocie": 0,
+                            "montantPayeBrutUE": 0,
+                            "montantPayeBrutCofiAssocie": 0
+                        }
+                    ],
+                    "codeTypePaiement": "AC"
+                },
+                {
+                    "idPaiement": "600000001",
+                    "datePaiement": "2023-10-10",
+                    "donMtPayes": [
+                        {
+                            "montantPayeBrutCofiDissocie": 0,
+                            "montantPayeBrutTopupDissocie": 0,
+                            "codeMUP": "7026_NAT_O.14_0001",
+                            "codeBudgetaireUE": "080301010001140260001006",
+                            "montantPayeBrutTopupAssocie": 0,
+                            "montantPayeBrutUE": 2086.4,
+                            "montantPayeBrutCofiAssocie": 521.6
+                        }
+                    ],
+                    "codeTypePaiement": "AC"
+                }
+            ],
+            "codeSIGestionSource": "DRP",
+            "horodatageGenerationFlux": "2023-09-29T14:01:58Z",
+            "codeAutoriteGestion": "NAT",
+            "donIndicRealisation": {
+                "donMtUnitaires": [
+                    {
+                        "quantiteCollecteeMU": 1,
+                        "codeMUP": "7026_NAT_O.14_0001"
+                    }
+                ]
+            },
+            "idDemandeAide": "00001923",
+            "codeStatutDA": "OPPA",
+            "codeStructurePayeuse": "ASP_DDRP"
+        }
+    }
+]
