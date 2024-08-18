@@ -1,0 +1,174 @@
+[
+  {
+    "demandeAide": {
+      "beneficiaireAide": {
+        "codeGenreBenAide": "PDP",
+        "exploitantAgricoleOn": true,
+        "guidBenAide": "fecf6ea4-9840-43aa-947f-ed9dcdfa09a7"
+      },
+      "calculAide": {
+        "donMtCalcules": [
+          {
+            "codeMUP": "7026_NAT_O.14_0001",
+            "montantCalculeDACofi": 2608,
+            "montantCalculeDATopup": 0
+          }
+        ]
+      },
+      "codeAutoriteGestion": "NAT",
+      "codeRegion": "076",
+      "codeSIGestionSource": "DRP",
+      "codeStatutDA": "OPPA",
+      "codeStructurePayeuse": "ASP_DDRP",
+      "dateDepotDA": "2023-04-05",
+      "dateValidationInstructionDA": "2023-07-11",
+      "donIndicRealisation": {
+        "donMtUnitaires": [
+          {
+            "codeMUP": "7026_NAT_O.14_0001",
+            "quantiteCollecteeMU": 1
+          }
+        ]
+      },
+      "donIndicResultats": [
+        {
+          "codeMi": "M.32",
+          "quantiteCollecteeMi": 1
+        },
+        {
+          "codeMi": "M.36",
+          "quantiteCollecteeMi": 2
+        },
+        {
+          "codeMi": "M.12",
+          "quantiteCollecteeMi": 3
+        }
+      ],
+      "hautDebitOn": false,
+      "horodatageGenerationFlux": "2023-09-29T14:01:58Z",
+      "idDemandeAide": "00001923",
+      "listeIdDossier": {
+        "idDossiersPartenaire": [
+          "00001923-1",
+          "00001923-2"
+        ]
+      },
+      "methanisationOn": false,
+      "modernisationInstallationIrrigationOn": false,
+      "nouvelleInstallationIrrigationOn": false,
+      "paiements": [
+        {
+          "codeTypePaiement": "AC",
+          "datePaiement": "2023-09-15",
+          "donMtPayes": [
+            {
+              "codeMUP": "7026_NAT_O.14_0001",
+              "montantPayeBrutCofiAssocie": 0,
+              "montantPayeBrutCofiDissocie": 0,
+              "montantPayeBrutTopupAssocie": 0,
+              "montantPayeBrutTopupDissocie": 0,
+              "montantPayeBrutUE": 0
+            }
+          ],
+          "idPaiement": "2"
+        },
+        {
+          "codeTypePaiement": "AC",
+          "datePaiement": "2023-10-10",
+          "donMtPayes": [
+            {
+              "codeBudgetaireUE": "080301010001140260001006",
+              "codeMUP": "7026_NAT_O.14_0001",
+              "montantPayeBrutCofiAssocie": 521.6,
+              "montantPayeBrutCofiDissocie": 0,
+              "montantPayeBrutTopupAssocie": 0,
+              "montantPayeBrutTopupDissocie": 0,
+              "montantPayeBrutUE": 2086.4
+            }
+          ],
+          "idPaiement": "600000001"
+        }
+      ],
+      "recyclageEauOn": false
+    }
+  },
+  {
+    "demandeAide": {
+      "beneficiaireAide": {
+        "codeGenreBenAide": "H",
+        "exploitantAgricoleOn": true,
+        "guidBenAide": "43541319-3869-41c1-8f7d-82968e63af38"
+      },
+      "calculAide": {
+        "donMtCalcules": [
+          {
+            "codeMUP": "7501_RHA_O.25_0003",
+            "montantCalculeDACofi": 56000,
+            "montantCalculeDATopup": 0
+          }
+        ]
+      },
+      "codeAutoriteGestion": "ARA",
+      "codeSIGestionSource": "ARA",
+      "codeStatutDA": "OPPA",
+      "codeStructurePayeuse": "ASP_DDRP",
+      "dateDepotDA": "2023-02-13",
+      "dateValidationInstructionDA": "2023-04-05",
+      "donIndicRealisation": {
+        "donMtUnitaires": [
+          {
+            "codeMUP": "7501_RHA_O.25_0003",
+            "quantiteCollecteeMU": 1
+          }
+        ]
+      },
+      "donIndicResultats": [
+        {
+          "codeMi": "M.36",
+          "quantiteCollecteeMi": 1
+        },
+        {
+          "codeMi": "M.37",
+          "quantiteCollecteeMi": 0
+        }
+      ],
+      "hautDebitOn": false,
+      "horodatageGenerationFlux": "2024-02-24T10:47:29.465Z",
+      "idDemandeAide": "00190557-1",
+      "listeIdDossier": {
+        "idDossiersPartenaire": [
+          "00190557-1"
+        ]
+      },
+      "methanisationOn": false,
+      "modernisationInstallationIrrigationOn": false,
+      "montantsReconciliationBrutsNets": [
+        {
+          "codeMUP": "7501_RHA_O.25_0003",
+          "montantNonPayeSanction": 0,
+          "montantRecouvre": 0
+        }
+      ],
+      "nouvelleInstallationIrrigationOn": false,
+      "paiements": [
+        {
+          "codeTypePaiement": "AC",
+          "datePaiement": "2024-03-11",
+          "donMtPayes": [
+            {
+              "codeBudgetaireUE": "080301010005250010025004",
+              "codeMUP": "7501_RHA_O.25_0003",
+              "montantPayeBrutCofiAssocie": 25536,
+              "montantPayeBrutCofiDissocie": 0,
+              "montantPayeBrutTopupAssocie": 0,
+              "montantPayeBrutTopupDissocie": 0,
+              "montantPayeBrutUE": 19264
+            }
+          ],
+          "idPaiement": "600001509"
+        }
+      ],
+      "recyclageEauOn": false
+    }
+  }
+]
