@@ -367,16 +367,51 @@ class Colonnes:
             courant["#cleCSV#"] = c1[0]
             # print(courant)
 
-        pprint(self.json_schema)
+        # pprint(self.json_schema)
+
+    def controle_validite(self):
+
+        print("\nNb colonnes:", len(cj.liste))
+            
+        # recherche de doublons
+        print("\nListe des doublons de clés:")
+        for i, c1 in enumerate(cj.liste):
+            for j, c2 in enumerate(cj.liste):
+                if j <= i:
+                    continue
+                if c1[1] == c2[1]:
+                    print("-", c1[2], "<->", c2[2])
+
+        print("Liste des doublons de libellés:")
+        for i, c1 in enumerate(cj.liste):
+            for j, c2 in enumerate(cj.liste):
+                if j <= i:
+                    continue
+                if c1[2] == c2[2]:
+                    print(c1)
+
+        print("Types contenus dans la Liste:")
+        type_liste: list = []
+        for i, c1 in enumerate(cj.liste):
+            if c1[3] not in type_liste:
+                type_liste.append(c1[3])
+
+        print(type_liste)
 
 
-class UnitTest(Colonnes):
+class ConvertJSON(Colonnes):
+
+    json_filename: str
+    csv_filename: str
+    SEPARATEUR: str = ";"
+
     def __init__(self):
         super().__init__()
-        self.csv: dict = dict()
+        self.csv: dict
 
-    def load_data_file(self, filename: str) -> None:
-        with open(filename, encoding="utf-8") as file_handler:
+    def load_data_file(self, json_filename: str) -> None:
+        self.json_filename = json_filename
+        with open(json_filename, encoding="utf-8") as file_handler:
             self.demandes_aide = json.load(file_handler)
 
     def decode(self, datas, json_schema, **options) -> None:
@@ -394,10 +429,12 @@ class UnitTest(Colonnes):
             if "[concat]" in cle_json:
                 # on concatene toutes les valeurs du tableau
                 cle = cle_json.split("[")[0]
+                cle_csv = json_schema.get(cle_json).get("#cleCSV#")
+
                 valeur = ""
                 for elt in datas.get(cle, []):
-                    valeur += f"{valeur} {elt}".strip()
-                self.csv[cle] = valeur
+                    valeur = f"{valeur} {elt}".strip()
+                self.csv[cle_csv] = valeur
                 continue
 
             elif "[]" in cle_json:
@@ -413,14 +450,14 @@ class UnitTest(Colonnes):
 
             elif "[index]" in cle_json:
                 # Traitement du tableau à faire
-                for index, elt in enumerate(datas.get(cle_json.split("[")[0])):
+                for index, elt in enumerate(datas.get(cle_json.split("[")[0], [])):
                     self.decode(
                         elt, 
                         json_schema.get(cle_json), 
                         index=index)
                 continue
 
-            elif json_schema.get(cle_json):
+            elif json_schema.get(cle_json).get("#cleCSV#") is None:
                 # il y a des sous cles a traiter
                 self.decode(
                     datas.get(cle_json),
@@ -432,52 +469,71 @@ class UnitTest(Colonnes):
                 if options.get("index") is not None:
                     # print("index:", options.get("index"), cle_json)
                     cle_csv = f'{cle_json}.{options.get("index")}'
+                    cle_csv = json_schema.get(
+                        cle_json).get("#cleCSV#").format(index=options.get("index"))
                 else:
                     cle_csv = cle_json
+                    cle_csv = json_schema.get(cle_json).get("#cleCSV#")
 
                 valeur = datas.get(cle_json)
                 if valeur is not None:
                     self.csv[cle_csv] = valeur
 
-    def convert_json_to_csv(self):
+    def write_file(self):
+        ligne: str = ""
+        # pprint(self.csv)
+
+        # Enregistre Titres
+        for col1, colonne, titre, *_ in self.liste:
+            valeur = self.csv.get(colonne)
+            if valeur is not None:
+                ligne += f"{valeur}"
+
+            ligne += self.SEPARATEUR
+
+        self.file_handler.write(f"{ligne}\n")
+
+    def process_json(self):
+        ligne: str = ""
+
+        # Enregistre Titres
+        for col1, colonne, titre, *_ in self.liste:
+            if titre:
+                ligne += f"{titre}"
+            else:
+                ligne += f"{colonne}"
+            ligne += self.SEPARATEUR
+
+        self.file_handler.write(f"{ligne}\n")
+
+        nb_docs: int = 0
         for conteneur in self.demandes_aide:
             demandeAide = conteneur.get("demandeAide")
+            self.csv = dict()
             self.decode(demandeAide, self.json_schema)
+            self.write_file()
+            if nb_docs % 1000 == 0:
+                print(".", end="", flush=True)
+            nb_docs += 1
+
+        print(f"\n{nb_docs} documents traités.")
+
+    def convert_json_to_csv(self):
+
+        try:
+            self.csv_filename = ".".join(self.json_filename.split(".")[:-1]) + ".csv"
+            with open(self.csv_filename, "w", encoding="utf-8") as self.file_handler:
+                self.process_json()
+
+        except Exception as erreur:
+            print("Erreur:", erreur)
+            raise erreur
 
 
 if __name__ == "__main__":
-    t1 = UnitTest()
-    exit()
 
-    t1.load_data_file("UneDA.json")
-    t1.convert_json_to_csv()
-
-    print("\nCSV:")
-    pprint(t1.csv)
-
-    print("\nNb colonnes:", len(t1.liste))
-        
-    # recherche de doublons
-    print("\nListe des doublons de clés:")
-    for i, c1 in enumerate(t1.liste):
-        for j, c2 in enumerate(t1.liste):
-            if j <= i:
-                continue
-            if c1[1] == c2[1]:
-                print("-", c1[2], "<->", c2[2])
-
-    print("Liste des doublons de libellés:")
-    for i, c1 in enumerate(t1.liste):
-        for j, c2 in enumerate(t1.liste):
-            if j <= i:
-                continue
-            if c1[2] == c2[2]:
-                print(c1)
-
-    print("Types contenus dans la Liste:")
-    type_liste: list = []
-    for i, c1 in enumerate(t1.liste):
-        if c1[3] not in type_liste:
-            type_liste.append(c1[3])
-
-    print(type_liste)
+    cj = ConvertJSON()
+    # cj.load_data_file("UneDA.json")
+    # cj.load_data_file("DeuxDA.json")
+    cj.load_data_file("Ddrp_Synapse_V2.2.json")
+    cj.convert_json_to_csv()
